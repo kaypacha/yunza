@@ -4,21 +4,30 @@ using UnityEngine;
 
 public class PaceManager : MonoBehaviour
 {
+    //Helpers
+    public static PaceManager instance;
 
+    //Patterns
+    public int patternAmmount = 4;
     public List<string> allPatterns;
 
     public int currentPattern;
 
+    //Timer
     float currentTime;
     public float timer;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        GeneratePattern(4);
+        instance = this;
+
+        GeneratePattern(patternAmmount);
         currentPattern = allPatterns.Count - 1;
 
         currentTime = Time.time;
+        Debug.Log(allPatterns[currentPattern]);
     }
 
     // Update is called once per frame
@@ -29,9 +38,9 @@ public class PaceManager : MonoBehaviour
             if (Time.time - currentTime > timer)
             {
                 currentTime = Time.time;
-                Debug.Log(allPatterns[currentPattern]);
-
                 currentPattern--;
+
+                Debug.Log(allPatterns[currentPattern]);
             }
         } else
         {
@@ -66,5 +75,17 @@ public class PaceManager : MonoBehaviour
 
         iterations -= 1;
         GeneratePattern(iterations);
+    }
+
+    public void CheckPattern(string pattern)
+    {
+        if (pattern==allPatterns[currentPattern])
+        {
+            Debug.Log(pattern + " | "+ allPatterns[currentPattern] + " | CORRECTO");
+        }
+        else
+        {
+            Debug.Log("GameOver");
+        }
     }
 }
