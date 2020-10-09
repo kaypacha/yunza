@@ -7,6 +7,8 @@ public class ZoneEntity : MonoBehaviour
 
     public string patternZone;
 
+    public KeyCode keyboardInput;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +18,10 @@ public class ZoneEntity : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(keyboardInput))
+        {
+            PaceManager.instance.CheckPattern(patternZone);
+        }
     }
 
     private void OnMouseOver()
