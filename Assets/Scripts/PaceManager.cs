@@ -5,18 +5,38 @@ using UnityEngine;
 public class PaceManager : MonoBehaviour
 {
 
-    public List<string> currentPattern;
+    public List<string> allPatterns;
+
+    public int currentPattern;
+
+    float currentTime;
+    public float timer;
 
     // Start is called before the first frame update
     void Start()
     {
         GeneratePattern(4);
+        currentPattern = allPatterns.Count - 1;
+
+        currentTime = Time.time;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (currentPattern>= 0)
+        {
+            if (Time.time - currentTime > timer)
+            {
+                currentTime = Time.time;
+                Debug.Log(allPatterns[currentPattern]);
+
+                currentPattern--;
+            }
+        } else
+        {
+            Debug.Log("YOU WIN");
+        }
     }
 
     void GeneratePattern(int iterations)
@@ -29,16 +49,16 @@ public class PaceManager : MonoBehaviour
         switch (r)
         {
             case 0:
-                currentPattern.Add("Red");
+                allPatterns.Add("Red");
                 break;
             case 1:
-                currentPattern.Add("Green");
+                allPatterns.Add("Green");
                 break;
             case 2:
-                currentPattern.Add("Blue");
+                allPatterns.Add("Blue");
                 break;
             case 3:
-                currentPattern.Add("Yellow");
+                allPatterns.Add("Yellow");
                 break;
             default:
                 break;
