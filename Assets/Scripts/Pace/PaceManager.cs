@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class PaceManager : MonoBehaviour
@@ -41,6 +42,8 @@ public class PaceManager : MonoBehaviour
     public float timer;
     public float axeTimer;
     public float timeToWin;
+    float timeStart;
+    int cTime;
     bool won = false;
 
     //Menus
@@ -64,9 +67,19 @@ public class PaceManager : MonoBehaviour
                 
         Debug.Log(allPatterns[currentPattern]);
         numberCounter = currentPattern + 1;
+        timeStart = Time.time + timeToWin;
+        cTime = (int)timeToWin;
     }
 
- 
+    void Timer()
+    {
+        timeToWin = (timeStart - Time.time);
+        if (cTime != (int)timeToWin)
+        {
+            cTime = (int)timeToWin;
+            SpawnSparkle();
+        }
+    }
 
     // Update is called once per frame
     void Update()
@@ -79,7 +92,7 @@ public class PaceManager : MonoBehaviour
         switch (currentState)
         {
             case GState.zones:
-
+                Timer();
                 if (currentPattern >= 0)
                 {
                     if (Time.time - currentTime > timer)
@@ -117,6 +130,7 @@ public class PaceManager : MonoBehaviour
 
                 break;
             case GState.axe:
+                Timer();
                 if (Time.time - currentTime > axeTimer)
                 {
                     if (won)
@@ -133,7 +147,7 @@ public class PaceManager : MonoBehaviour
                                 currentState = GState.wait;
                                 treePrompt.SetActive(false);
 
-                                SpawnSparkle();
+                                //SpawnSparkle();
                             }
                             else
                             {
@@ -283,7 +297,7 @@ public class PaceManager : MonoBehaviour
             {
                 if (!hit)
                 {
-                    SpawnSparkle();
+                    //SpawnSparkle();
                 }
 
                 hit = true;                
