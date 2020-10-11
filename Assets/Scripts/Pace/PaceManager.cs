@@ -40,6 +40,9 @@ public class PaceManager : MonoBehaviour
     public float timer;
     public float axeTimer;
 
+    //Menus
+    public GameObject loseMenu;
+    public GameObject winMenu;
 
     // Start is called before the first frame update
     void Start()
@@ -81,8 +84,7 @@ public class PaceManager : MonoBehaviour
                             }
                         } else
                         {
-                            tree.GetComponent<SpriteRenderer>().color = Color.white;
-                            Debug.Log("GameOver");
+                            Lose();
                         }
                     }
                 }
@@ -131,6 +133,17 @@ public class PaceManager : MonoBehaviour
 
     }
 
+    void Lose()
+    {
+        tree.GetComponent<SpriteRenderer>().color = Color.white;
+        currentState = GState.lose;
+        loseMenu.SetActive(true);
+    }
+
+    void Win()
+    {
+
+    }
     
     void NextPattern(int current)
     {
@@ -227,7 +240,7 @@ public class PaceManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("GameOver");
+                Lose();
             }
         }
     }
