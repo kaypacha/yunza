@@ -17129,11 +17129,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
-  patternAmmount: 60
+  patternAmmount: 35
   allPatterns: []
   currentPattern: 0
   hit: 0
-  nForAxe: 010000001e0000003b000000
+  nForAxe: 0200000009000000100000001900000022000000
   tree: {fileID: 1705390136}
   treePrompt: {fileID: 723120642}
   nHits: 8
