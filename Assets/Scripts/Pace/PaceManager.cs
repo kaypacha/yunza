@@ -47,6 +47,7 @@ public class PaceManager : MonoBehaviour
     public GameObject loseMenu;
     public GameObject winMenu;
     public Text counter;
+    public GameObject counterSparkle;
     float numberCounter;
 
     // Start is called before the first frame update
@@ -131,6 +132,8 @@ public class PaceManager : MonoBehaviour
                                 currentTime = Time.time;
                                 currentState = GState.wait;
                                 treePrompt.SetActive(false);
+
+                                SpawnSparkle();
                             }
                             else
                             {
@@ -263,6 +266,15 @@ public class PaceManager : MonoBehaviour
         }
     }
 
+    void SpawnSparkle()
+    {
+        numberCounter--;
+        //SPARKLE
+        counterSparkle.SetActive(true);
+        Instantiate(counterSparkle, counterSparkle.transform.parent);
+        counterSparkle.SetActive(false);
+    }
+
     public void CheckPattern(string pattern)
     {
         if (currentState == GState.zones)
@@ -271,8 +283,7 @@ public class PaceManager : MonoBehaviour
             {
                 if (!hit)
                 {
-                    numberCounter--;
-                    //SPARKLE
+                    SpawnSparkle();
                 }
 
                 hit = true;                
