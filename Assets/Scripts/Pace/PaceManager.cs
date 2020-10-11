@@ -23,12 +23,16 @@ public class PaceManager : MonoBehaviour
 
     public int currentPattern;
     public bool hit;
-    public GameObject tree;
     public int nForAxe;
+
+    //Axe
+    public GameObject tree;
+    public float nHits;
 
     //Timer
     float currentTime;
     public float timer;
+    public float axeTimer;
 
 
     // Start is called before the first frame update
@@ -60,7 +64,10 @@ public class PaceManager : MonoBehaviour
                     if (Time.time - currentTime > timer)
                     {
                         NextPattern(currentPattern);
-
+                        if (allPatterns[currentPattern] == "Axe")
+                        {
+                            currentState = GState.axe;
+                        }
                         //Debug.Log(allPatterns[currentPattern]);
                     }
                 }
@@ -71,6 +78,10 @@ public class PaceManager : MonoBehaviour
 
                 break;
             case GState.axe:
+                if (Time.time - currentTime > axeTimer)
+                {
+                    tree.SetActive(true);
+                }
                 break;
             case GState.win:
                 break;
