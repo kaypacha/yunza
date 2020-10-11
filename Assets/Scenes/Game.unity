@@ -8189,7 +8189,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &954566106
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8206,7 +8206,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -5.7, y: 115.70001}
+  m_AnchoredPosition: {x: -5.7, y: 547}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &954566107
@@ -17447,7 +17447,7 @@ MonoBehaviour:
   waitAferAxe: 1
   timer: 1.5
   axeTimer: 3
-  timeToWin: 58
+  timeToWin: 60
   loseMenu: {fileID: 1504295122}
   winMenu: {fileID: 68615909}
   counter: {fileID: 1981228297}

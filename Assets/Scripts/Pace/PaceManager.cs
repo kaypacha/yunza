@@ -71,7 +71,7 @@ public class PaceManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        counter.text = (numberCounter).ToString();
+        counter.text = ((int)timeToWin).ToString();
         if (Time.time - currentTime > timeToWin)
         {
             won = true;
