@@ -47,6 +47,7 @@ public class PaceManager : MonoBehaviour
     public GameObject loseMenu;
     public GameObject winMenu;
     public Text counter;
+    float numberCounter;
 
     // Start is called before the first frame update
     void Start()
@@ -61,6 +62,7 @@ public class PaceManager : MonoBehaviour
         NextPattern(allPatterns.Count);
                 
         Debug.Log(allPatterns[currentPattern]);
+        numberCounter = currentPattern + 1;
     }
 
  
@@ -68,7 +70,7 @@ public class PaceManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        counter.text = (currentPattern+1).ToString();
+        counter.text = (numberCounter).ToString();
         if (Time.time - currentTime > timeToWin)
         {
             won = true;
@@ -267,7 +269,13 @@ public class PaceManager : MonoBehaviour
         {
             if (pattern == allPatterns[currentPattern])
             {
-                hit = true;
+                if (!hit)
+                {
+                    numberCounter--;
+                    //SPARKLE
+                }
+
+                hit = true;                
                 Debug.Log(pattern + " | " + allPatterns[currentPattern] + " | CORRECTO");
             }
             else
