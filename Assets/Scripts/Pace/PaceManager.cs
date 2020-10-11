@@ -27,7 +27,9 @@ public class PaceManager : MonoBehaviour
 
     //Axe
     public GameObject tree;
-    public float nHits;
+    public int nHits;
+    int currentHits;
+
 
     //Timer
     float currentTime;
@@ -63,12 +65,19 @@ public class PaceManager : MonoBehaviour
                 {
                     if (Time.time - currentTime > timer)
                     {
-                        NextPattern(currentPattern);
-                        if (allPatterns[currentPattern] == "Axe")
+                        if (hit)
                         {
-                            currentState = GState.axe;
+                            NextPattern(currentPattern);
+                            if (allPatterns[currentPattern] == "Axe")
+                            {
+                                currentState = GState.axe;
+                                tree.SetActive(true);
+                                currentHits = 0;
+                            }
+                        } else
+                        {
+                            Debug.Log("GameOver");
                         }
-                        //Debug.Log(allPatterns[currentPattern]);
                     }
                 }
                 else
@@ -80,7 +89,21 @@ public class PaceManager : MonoBehaviour
             case GState.axe:
                 if (Time.time - currentTime > axeTimer)
                 {
-                    tree.SetActive(true);
+                    if (currentHits >= nHits)
+                    {
+                        if (currentPattern > 0)
+                        {
+                            currentState = GState.zones;
+                            NextPattern(currentPattern);
+                        } else
+                        {
+                            Debug.Log("YOU WIN AXE");
+                        }
+                        
+                    }else
+                    {
+                        Debug.Log("GAME OVER AXE");
+                    }
                 }
                 break;
             case GState.win:
@@ -119,6 +142,7 @@ public class PaceManager : MonoBehaviour
     void NextPattern(int current)
     {
         currentPattern = current - 1;
+        hit = false;
 
         if (currentPattern>=0)
         {
@@ -179,6 +203,7 @@ public class PaceManager : MonoBehaviour
     {
         if (pattern==allPatterns[currentPattern])
         {
+            hit = true;
             Debug.Log(pattern + " | "+ allPatterns[currentPattern] + " | CORRECTO");
         }
         else

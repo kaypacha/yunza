@@ -29,6 +29,7 @@ public class ZoneEntity : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             PaceManager.instance.CheckPattern(patternZone);
+            //TO DO: SPAWN FUEGOS ARTIFICIALES
         }
     }
 }
