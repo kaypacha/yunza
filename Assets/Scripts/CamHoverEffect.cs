@@ -38,7 +38,7 @@ public class CamHoverEffect : MonoBehaviour
 
         //Debug.DrawLine(camTransform.position, targetPos);
         //Debug.DrawLine(originalPos,((Vector3)targetPos-camTransform.position),Color.red);
-        if (Time.time - currentTime > timer)
+        if (Time.time - currentTime > timer/Difficulter.instance.Check())
         {
             SetNewTargetPos();
             currentTime = Time.time;
@@ -54,7 +54,7 @@ public class CamHoverEffect : MonoBehaviour
     {
         if (!goCenter)
         {
-            targetPos = (Vector2)center.position + Random.insideUnitCircle * circleBound;
+            targetPos = (Vector2)center.position + Random.insideUnitCircle * circleBound * Difficulter.instance.Check();
             goCenter = true;
         } else
         {

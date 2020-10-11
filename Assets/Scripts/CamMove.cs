@@ -33,7 +33,7 @@ public class CamMove : MonoBehaviour
         //float b = Vector2.SignedAngle(cam.position, test2.position);
         //Debug.Log(b);
 
-        scene.Translate(test*speed*-Time.deltaTime);
+        scene.Translate(test*(speed*Difficulter.instance.Check())*-Time.deltaTime);
 
 
         //cam.position = Vector3.MoveTowards(cam.position,cam.position+(Vector3)test,maxDelta);
