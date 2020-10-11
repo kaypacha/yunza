@@ -30,7 +30,8 @@ public class PaceManager : MonoBehaviour
     public GameObject tree;
     public GameObject treePrompt;
     public int nHits;
-    int currentHits;
+    public int currentHits;
+    public int GetCurrentHits() { return currentHits; }
     public float waitAferAxe;
 
 

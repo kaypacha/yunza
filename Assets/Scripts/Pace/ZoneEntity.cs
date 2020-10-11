@@ -18,18 +18,33 @@ public class ZoneEntity : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(keyboardInput))
+        if (PaceManager.instance.currentState == PaceManager.GState.zones)
         {
-            PaceManager.instance.CheckPattern(patternZone);
+            GetComponent<Collider2D>().enabled = true;
+            if (Input.GetKeyDown(keyboardInput))
+            {
+                PaceManager.instance.CheckPattern(patternZone);
+            }
+        } else
+        {
+            GetComponent<Collider2D>().enabled = false;
         }
+        
     }
 
     private void OnMouseOver()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (PaceManager.instance.currentState == PaceManager.GState.zones)
         {
-            PaceManager.instance.CheckPattern(patternZone);
-            //TO DO: SPAWN FUEGOS ARTIFICIALES
+            GetComponent<Collider2D>().enabled = true;
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                PaceManager.instance.CheckPattern(patternZone);
+                //TO DO: SPAWN FUEGOS ARTIFICIALES
+            }
+        } else
+        {
+            GetComponent<Collider2D>().enabled = false;
         }
     }
 }
