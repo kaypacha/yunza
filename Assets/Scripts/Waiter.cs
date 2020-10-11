@@ -9,6 +9,7 @@ public class Waiter : MonoBehaviour
     float currentTime;
     public CamMove cM;
     public CamHoverEffect cHE;
+    public CamZoomer cZ;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,7 @@ public class Waiter : MonoBehaviour
         {
             cM.enabled = true;
             cHE.enabled = true;
+            cZ.enabled = true;
         }
     }
 }
