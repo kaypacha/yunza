@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PaceManager : MonoBehaviour
 {
@@ -45,6 +46,7 @@ public class PaceManager : MonoBehaviour
     //Menus
     public GameObject loseMenu;
     public GameObject winMenu;
+    public Text counter;
 
     // Start is called before the first frame update
     void Start()
@@ -66,6 +68,7 @@ public class PaceManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        counter.text = (currentPattern+1).ToString();
         if (Time.time - currentTime > timeToWin)
         {
             won = true;
