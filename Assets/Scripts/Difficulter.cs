@@ -25,7 +25,7 @@ public class Difficulter : MonoBehaviour
     {
         currentKey = Time.time / maxTime;
         timePassed = Time.time;
-        Debug.Log(timePassed + " | " + Time.time + " | " + dificultyCurve.Evaluate(currentKey));
+        //Debug.Log(timePassed + " | " + Time.time + " | " + dificultyCurve.Evaluate(currentKey));
     }
 
     public float Check()
