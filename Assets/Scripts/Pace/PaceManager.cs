@@ -90,7 +90,7 @@ public class PaceManager : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("YOU WIN");
+                    Win();
                 }
 
                 break;
@@ -142,7 +142,9 @@ public class PaceManager : MonoBehaviour
 
     void Win()
     {
-
+        tree.GetComponent<SpriteRenderer>().color = Color.white;
+        currentState = GState.win;
+        winMenu.SetActive(true);
     }
     
     void NextPattern(int current)
