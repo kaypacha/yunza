@@ -11,6 +11,7 @@ public class PaceManager : MonoBehaviour
     public enum GState { 
         zones,
         axe,
+        wait,
         win,
         lose
     }
@@ -23,12 +24,14 @@ public class PaceManager : MonoBehaviour
 
     public int currentPattern;
     public bool hit;
-    public int nForAxe;
+    public List<int> nForAxe;
 
     //Axe
     public GameObject tree;
+    public GameObject treePrompt;
     public int nHits;
     int currentHits;
+    public float waitAferAxe;
 
 
     //Timer
@@ -43,7 +46,7 @@ public class PaceManager : MonoBehaviour
         instance = this;
 
         GeneratePattern(patternAmmount);
-        AddAxe(nForAxe-1);
+        AddAxe();
 
         allPatterns.Reverse();
 
@@ -71,11 +74,13 @@ public class PaceManager : MonoBehaviour
                             if (allPatterns[currentPattern] == "Axe")
                             {
                                 currentState = GState.axe;
-                                tree.SetActive(true);
+                                treePrompt.SetActive(true);
                                 currentHits = 0;
+                                tree.GetComponent<SpriteRenderer>().color = Color.white;
                             }
                         } else
                         {
+                            tree.GetComponent<SpriteRenderer>().color = Color.white;
                             Debug.Log("GameOver");
                         }
                     }
@@ -93,8 +98,9 @@ public class PaceManager : MonoBehaviour
                     {
                         if (currentPattern > 0)
                         {
-                            currentState = GState.zones;
-                            NextPattern(currentPattern);
+                            currentTime = Time.time;
+                            currentState = GState.wait;
+                            treePrompt.SetActive(false);
                         } else
                         {
                             Debug.Log("YOU WIN AXE");
@@ -102,6 +108,7 @@ public class PaceManager : MonoBehaviour
                         
                     }else
                     {
+                        tree.GetComponent<SpriteRenderer>().color = Color.white;
                         Debug.Log("GAME OVER AXE");
                     }
                 }
@@ -109,6 +116,13 @@ public class PaceManager : MonoBehaviour
             case GState.win:
                 break;
             case GState.lose:
+                break;
+            case GState.wait:
+                if (Time.time - currentTime > waitAferAxe)
+                {
+                    currentState = GState.zones;
+                    NextPattern(currentPattern);
+                }
                 break;
             default:
                 break;
@@ -180,35 +194,68 @@ public class PaceManager : MonoBehaviour
                 break;
         }
 
+        if (allPatterns.Count>1)
+        {
+            CheckPatternDup();
+        }
+        
+
         iterations -= 1;
         GeneratePattern(iterations);
     }
 
-    void AddAxe(int current)
+    void CheckPatternDup()
     {
-        if (current >= allPatterns.Count)
+        while (allPatterns[allPatterns.Count-1] == allPatterns[allPatterns.Count - 2])
         {
-            return;
-        } else
+            int r = Random.Range(0, 4);
+            switch (r)
+            {
+                case 0:
+                    allPatterns[allPatterns.Count - 1] = "Red";
+                    break;
+                case 1:
+                    allPatterns[allPatterns.Count - 1] = "Green";
+                    break;
+                case 2:
+                    allPatterns[allPatterns.Count - 1] = "Blue";
+                    break;
+                case 3:
+                    allPatterns[allPatterns.Count - 1] = "Yellow";
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    void AddAxe()
+    {
+        for (int i = 0; i < nForAxe.Count; i++)
         {
-            allPatterns[current] = "Axe";
-
-            current += nForAxe;
-
-            AddAxe(current);
+            allPatterns[nForAxe[i]] = "Axe";
         }
     }
 
     public void CheckPattern(string pattern)
     {
-        if (pattern==allPatterns[currentPattern])
+        if (currentState == GState.zones)
         {
-            hit = true;
-            Debug.Log(pattern + " | "+ allPatterns[currentPattern] + " | CORRECTO");
+            if (pattern == allPatterns[currentPattern])
+            {
+                hit = true;
+                Debug.Log(pattern + " | " + allPatterns[currentPattern] + " | CORRECTO");
+            }
+            else
+            {
+                Debug.Log("GameOver");
+            }
         }
-        else
-        {
-            Debug.Log("GameOver");
-        }
+    }
+
+    public void SwingAxe()
+    {
+        currentHits++;
+        Debug.LogWarning(currentHits);
     }
 }
