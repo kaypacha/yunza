@@ -869,7 +869,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 519420032}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &68615909
 GameObject:
@@ -4707,7 +4707,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 723120643}
   - {fileID: 61057916}
   m_Father: {fileID: 1370813432}
   m_RootOrder: 0
@@ -6366,13 +6365,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 723120642}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.033, y: 0.039999984, z: 20}
+  m_LocalPosition: {x: 0.033, y: 0.039999984, z: 11}
   m_LocalScale: {x: 66.703, y: 120.2688, z: 13.975169}
   m_Children:
   - {fileID: 230415394}
   - {fileID: 1494469141}
-  m_Father: {fileID: 519420032}
-  m_RootOrder: 0
+  m_Father: {fileID: 1370813432}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &723120644
 SpriteRenderer:
@@ -11627,6 +11626,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 519420032}
+  - {fileID: 723120643}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -17047,7 +17047,7 @@ MonoBehaviour:
   waitAferAxe: 1
   timer: 1.5
   axeTimer: 3
-  timeToWin: 60
+  timeToWin: 58
   loseMenu: {fileID: 1504295122}
   winMenu: {fileID: 68615909}
   counter: {fileID: 1981228297}

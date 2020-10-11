@@ -118,6 +118,7 @@ public class PaceManager : MonoBehaviour
                 {
                     if (won)
                     {
+                        Win();
                         Debug.Log("Axe TimeWIN");
                     } else
                     {
