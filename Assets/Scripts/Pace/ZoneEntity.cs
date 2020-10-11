@@ -12,7 +12,7 @@ public class ZoneEntity : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        SetColor();
     }
 
     // Update is called once per frame
@@ -28,6 +28,14 @@ public class ZoneEntity : MonoBehaviour
         } else
         {
             GetComponent<Collider2D>().enabled = false;
+        }   
+    }
+
+    public void SetColor()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).GetComponent<SpriteRenderer>().color = ColorReferencer.instance.GetColorRef(patternZone);
         }
         
     }

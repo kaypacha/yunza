@@ -131,29 +131,7 @@ public class PaceManager : MonoBehaviour
 
     }
 
-    Color PatternToColor(string pattern)
-    {
-        Color res = Color.white;
-        switch (pattern)
-        {
-            case "Red":
-                res = Color.red;
-                break;
-            case "Blue":
-                res = Color.blue;
-                break;
-            case "Green":
-                res = Color.green;
-                break;
-            case "Yellow":
-                res = Color.yellow;
-                break;
-            default:
-                break;
-        }
-
-        return res;
-    }
+    
     void NextPattern(int current)
     {
         currentPattern = current - 1;
@@ -163,7 +141,7 @@ public class PaceManager : MonoBehaviour
         {
             currentTime = Time.time;
 
-            tree.GetComponent<SpriteRenderer>().color = PatternToColor(allPatterns[currentPattern]);
+            tree.GetComponent<SpriteRenderer>().color = ColorReferencer.instance.GetColorRef(allPatterns[currentPattern]);
         } else
         {
             tree.GetComponent<SpriteRenderer>().color = Color.white;
