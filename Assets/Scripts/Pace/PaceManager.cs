@@ -39,6 +39,8 @@ public class PaceManager : MonoBehaviour
     float currentTime;
     public float timer;
     public float axeTimer;
+    public float timeToWin;
+    bool won = false;
 
     //Menus
     public GameObject loseMenu;
@@ -64,6 +66,10 @@ public class PaceManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Time.time - currentTime > timeToWin)
+        {
+            won = true;
+        }
         switch (currentState)
         {
             case GState.zones:
@@ -72,47 +78,67 @@ public class PaceManager : MonoBehaviour
                 {
                     if (Time.time - currentTime > timer)
                     {
-                        if (hit)
+                        if (won)
                         {
-                            NextPattern(currentPattern);
-                            if (allPatterns[currentPattern] == "Axe")
+                            Win();
+                            Debug.Log("Zone TimeWIN");
+                        }
+                        else {
+                            if (hit)
                             {
-                                currentState = GState.axe;
-                                treePrompt.SetActive(true);
-                                currentHits = 0;
-                                tree.GetComponent<SpriteRenderer>().color = Color.white;
+                                NextPattern(currentPattern);
+                                if (allPatterns[currentPattern] == "Axe")
+                                {
+                                    currentState = GState.axe;
+                                    treePrompt.SetActive(true);
+                                    currentHits = 0;
+                                    tree.GetComponent<SpriteRenderer>().color = Color.white;
+                                }
                             }
-                        } else
-                        {
-                            Lose();
+                            else
+                            {
+                                Lose();
+                                Debug.Log("Zone LOSE");
+                            }
                         }
                     }
                 }
                 else
                 {
                     Win();
+                    Debug.Log("Zone Win");
                 }
 
                 break;
             case GState.axe:
                 if (Time.time - currentTime > axeTimer)
                 {
-                    if (currentHits >= nHits)
+                    if (won)
                     {
-                        if (currentPattern > 0)
+                        Debug.Log("Axe TimeWIN");
+                    } else
+                    {
+                        if (currentHits >= nHits)
                         {
-                            currentTime = Time.time;
-                            currentState = GState.wait;
-                            treePrompt.SetActive(false);
-                        } else
-                        {
-                            Debug.Log("YOU WIN AXE");
+                            if (currentPattern > 0)
+                            {
+                                currentTime = Time.time;
+                                currentState = GState.wait;
+                                treePrompt.SetActive(false);
+                            }
+                            else
+                            {
+                                Win();
+                                Debug.Log("Axe Win");
+                            }
+
                         }
-                        
-                    }else
-                    {
-                        tree.GetComponent<SpriteRenderer>().color = Color.white;
-                        Debug.Log("GAME OVER AXE");
+                        else
+                        {
+                            tree.GetComponent<SpriteRenderer>().color = Color.white;
+                            Lose();
+                            Debug.Log("Axe Lose");
+                        }
                     }
                 }
                 break;

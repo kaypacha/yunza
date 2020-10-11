@@ -16806,6 +16806,7 @@ MonoBehaviour:
   waitAferAxe: 1
   timer: 1.5
   axeTimer: 3
+  timeToWin: 60
   loseMenu: {fileID: 1504295122}
   winMenu: {fileID: 68615909}
 --- !u!114 &2046204344
